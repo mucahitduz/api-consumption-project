@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import apiClient from "../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
-
-/*
-API için Login Bilgileri
-  {
-  "email": "john@mail.com",
-  "password": "changeme"
-  }
-*/
+import { GoogleLogin } from "@react-oauth/google";
 
 interface LoginProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -68,9 +61,25 @@ const Login = ({ setIsLoggedIn }: LoginProps) => {
         >
           Login
         </button>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
       </div>
     </div>
   );
 };
 
 export default Login;
+
+/*
+API için Login Bilgileri
+  {
+  "email": "john@mail.com",
+  "password": "changeme"
+  }
+*/
